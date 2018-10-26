@@ -1,15 +1,15 @@
 import createError from 'http-errors';
 import middy from 'middy';
-import { joiValidator, Validation } from '../joiValidator';
+import { eventValidator, Validation } from '../eventValidator';
 
-describe('Joi Validation Handler for Middy', () => {
+describe('Event validation for Middy', () => {
   test('Validation', () => {
     const handler = middy(() => {
       throw new createError.UnprocessableEntity();
     });
 
     handler
-      .use(joiValidator({
+      .use(eventValidator({
 
       }));
 

@@ -1,8 +1,8 @@
 {
-  "name": "@keboola/middy-joi-validator",
+  "name": "@keboola/middy-event-validator",
   "version": "1.0.0",
-  "description": "Joi validation middleware for Middy",
-  "repository": "https://github.com/keboola/middy-joi-validator",
+  "description": "Event validation middleware for Middy",
+  "repository": "https://github.com/keboola/middy-joi-event-validator",
   "author": "Jakub Matejka <jakub@keboola.com>",
   "license": "MIT",
   "publishConfig": {
@@ -39,5 +39,5 @@
   "files": [
     "dist"
   ],
-  "main": "dist/joiValidator.js"
+  "main": "dist/eventValidator.js"
 }

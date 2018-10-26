@@ -3,33 +3,22 @@ import createError from 'http-errors';
 import Joi from 'joi';
 
 function buildSchema(def) {
-  let body = {};
-  const headers = {};
-  let path = {};
-  let query = {};
-
-  if (_.has(def, 'query')) {
-    query = _.merge(query, def.query);
-  }
-
-  if (_.has(def, 'body')) {
-    body = _.merge(body, def.body);
-  }
+  const body = _.get(def, 'body', {});
+  const headers = _.get(def, 'headers', {});
+  const path = _.get(def, 'path', {});
+  const query = _.get(def, 'query', {});
 
   if (_.has(def, 'pagination')) {
     query.offset = Joi.number().integer().default(0)
       .min(0)
       .allow('')
       .error(createError(422, 'Parameter offset must be integer greater then 0'));
-    query.limit = Joi.number().integer().default(1000)
+    const max = _.get(def, 'pagination.max', 1000);
+    query.limit = Joi.number().integer().default(max)
       .min(1)
-      .max(1000)
+      .max(_.get(def, 'pagination.max', max))
       .allow('')
-      .error(createError(422, 'Parameter limit must be integer between 1 and 1000'));
-  }
-
-  if (_.has(def, 'path')) {
-    path = _.merge(path, def.path);
+      .error(createError(422, `Parameter limit must be integer between 1 and ${max}`));
   }
 
   const res = {};
@@ -49,7 +38,7 @@ function buildSchema(def) {
   return res;
 }
 
-export default function joiValidator({ schema }) {
+export default function eventValidator({ schema }) {
   return {
     before: (handler, next) => {
       const res = Joi.validate(
@@ -88,12 +77,6 @@ export class Validation {
     return Joi.string().max(length).optional().allow(null)
       .trim()
       .error(createError(`Parameter ${param} must be a string with max length of ${length}`));
-  }
-
-  static stringUri(param) {
-    return Joi.string().max(255).optional().allow(null)
-      .trim()
-      .error(createError(`Parameter ${param} must be a valid uri with max length of 255`));
   }
 
   static integer(param) {

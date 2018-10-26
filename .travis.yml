@@ -16,5 +16,5 @@ deploy:
   api_key: $NPM_TOKEN
   on:
     tags: true
-    repo: keboola/middy-joi-validator
+    repo: keboola/middy-event-validator
     branch: master
