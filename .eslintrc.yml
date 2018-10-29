@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@keboola/node"
+  ],
+  "plugins": [
+    "import"
+  ],
+  "env": {
+    "node": true,
+    "jest": true
+  }
+}
