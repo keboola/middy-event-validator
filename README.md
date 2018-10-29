@@ -43,7 +43,7 @@ The module also offers a set of validation shortcuts using class `Validation`:
 
 ```javascript
 import middy from 'middy';
-import { eventValidator, Validation } from '@keboola/middy-event-validator';
+import eventValidator, { Validation } from '@keboola/middy-event-validator';
 
 handler
   .use(eventValidator({
