@@ -67,3 +67,7 @@ List of available shortcuts:
 - `arrayOfStrings(param)`
 
 All shortcuts create optional parameters, for required parameters add `.required()`.
+
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
